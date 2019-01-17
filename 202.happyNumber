@@ -1,0 +1,23 @@
+class Solution {
+     List<Integer> set=new ArrayList();
+    public boolean isHappy(int n) {
+        
+       
+        int rem=0;
+        int squareSum=0;
+        while(n!=0)
+        {rem=n%10;
+        n=n/10;
+        squareSum+=(rem*rem);}
+        
+        if(squareSum==1)
+            return true;
+        else if(set.contains(squareSum))
+            return false;
+        else
+            set.add(squareSum);
+        
+          return isHappy(squareSum); 
+        
+    }
+}
