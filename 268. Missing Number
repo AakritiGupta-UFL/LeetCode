@@ -1,0 +1,28 @@
+class Solution {
+    public int missingNumber(int[] nums) {
+        int len=nums.length;
+        int missNo=0;
+        Arrays.sort(nums);
+        if(nums[0]!=0)
+        {
+            missNo=0;
+        }
+        else if(nums[nums.length-1]!=nums.length)
+        {
+            missNo=nums.length;
+        }
+    
+        else{
+        for(int i=0;i<len;i++)
+        {
+            
+            if(nums[i]+1!=nums[i+1])
+            {
+                missNo=nums[i]+1;
+                break;
+            }
+        }
+        }
+        return missNo;
+    }
+}
