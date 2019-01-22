@@ -1,0 +1,39 @@
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        int N=nums.length;
+        HashMap<Integer,Integer> hash=new HashMap<Integer,Integer>();
+        List<Integer>[]listArr=new List[nums.length+1];
+        List<Integer>res=new ArrayList<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            if(hash.containsKey(nums[i]))
+            {
+              hash.put(nums[i],hash.get(nums[i])+1);
+            }
+            else
+                hash.put(nums[i],1);
+        }
+        int len=hash.size();
+        
+        for (Map.Entry<Integer, Integer> e:hash.entrySet())
+        {
+            int cnt=e.getValue();
+            int num=e.getKey();
+            if(listArr[cnt]==null) listArr[cnt]=new ArrayList<>();
+            listArr[cnt].add(num);
+        }
+        int curCnt=N;
+        while(res.size()<k)
+        {
+          if(listArr[curCnt]!=null && listArr[curCnt].size()!=0)
+          {
+              res.add(listArr[curCnt].get(listArr[curCnt].size()-1));
+              listArr[curCnt].remove(listArr[curCnt].size()-1);
+              if(res.size()==k) break;
+          }
+            else
+                curCnt--;
+        }
+        return res;
+    }
+}
