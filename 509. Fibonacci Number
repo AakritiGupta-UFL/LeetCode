@@ -1,0 +1,17 @@
+class Solution {
+    public int fib(int N) {
+        if(N==0) return 0;
+        if(N==1) return 1;
+        int sol=0;
+        int one_step_back=1;
+        int two_step_back=0;
+        
+        for(int i=2;i<=N;i++)
+        {
+           sol=one_step_back+two_step_back;
+            two_step_back=one_step_back;
+            one_step_back=sol;
+        }
+        return sol;
+    }
+}
