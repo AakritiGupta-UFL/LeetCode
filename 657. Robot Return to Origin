@@ -1,0 +1,29 @@
+class Solution {
+    public boolean judgeCircle(String moves) {
+        int[] count=new int[5];
+        for(char k:moves.toCharArray())
+        {
+            if(k=='U')
+            {
+               count[1]++; 
+            }
+            if(k=='R')
+            {
+               count[2]++; 
+            }
+            if(k=='L')
+            {
+               count[3]++; 
+            }
+            if(k=='D')
+            {
+               count[4]++; 
+            }
+        }
+        if(count[1]==count[4] && count[2]==count[3])
+        {
+            return true;
+        }
+        return false;
+    }
+}
