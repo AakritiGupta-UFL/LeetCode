@@ -1,0 +1,16 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+       boolean[] dp=new boolean[s.length()+1];
+        Set<String> dict=new HashSet(wordDict);
+        dp[0]=true;  //empty string is always there in dictionary
+        for(int i=1;i<s.length()+1;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(dp[j]&& wordDict.contains(s.substring(j, i)))          //contains substring from 0 to j and i to j
+                    dp[i]=true;                                         //dp[j]=true if there is substring from 0 to j
+            }
+        }
+        return dp[s.length()];
+    }
+}
