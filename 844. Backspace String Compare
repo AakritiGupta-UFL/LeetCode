@@ -1,0 +1,19 @@
+class Solution {
+    public boolean backspaceCompare(String S, String T) {
+        return stringForm(S).equals(stringForm(T));
+    }
+    private String stringForm(String s)
+    {
+        Stack<Character> st=new Stack<>();
+        char[]ch=s.toCharArray();
+        for(int i=0;i<ch.length;i++)
+        {
+          if(ch[i]=='#' && !st.isEmpty())
+              st.pop();
+            else if(ch[i]!='#')
+                st.push(ch[i]);
+            else{}
+        }
+        return String.valueOf(st);
+    }
+}
