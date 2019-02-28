@@ -1,0 +1,22 @@
+class Solution {
+   public List<String> letterCasePermutation(String S) {
+        List<String> result = new ArrayList<String>();
+        result.add(S);
+        for(int i=0; i<S.length(); i++) {
+            int a = (int)S.charAt(i);
+            if((a > 95 && a < 123) || (a > 64 && a < 91)) {
+                List<String> temp = new ArrayList<String>();
+                for(String s : result) {
+                    StringBuilder sb = new StringBuilder(s);
+                    if(a>64 && a<91)
+                        sb.setCharAt(i, (char)(a + 32));
+                    else
+                        sb.setCharAt(i, (char)(a - 32));
+                    temp.add(sb.toString());
+                }
+                result.addAll(temp);
+            }
+        }
+        return result;
+    }
+}
