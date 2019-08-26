@@ -1,0 +1,40 @@
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+       int len2=arr2.length; 
+       int len1=arr1.length;
+        int[]arr3=new int[len1];
+        ArrayList<Integer> temp=new ArrayList<>();
+        int k=0;
+        int max=9999;
+        for(int i=0;i<len2;i++)
+        {
+            for(int j=0;j<len1;j++)
+            {
+                if(arr1[j]==arr2[i])
+                {
+                    arr3[k]=arr1[j];
+                    k++;
+                    arr1[j]=max;
+                }  
+            }
+        }
+        int l=0;
+        for(int i=0;i<len1;i++)
+        {
+            if(arr1[i]!=max)
+            {
+                temp.add(arr1[i]);
+            }
+        }
+       Collections.sort(temp);
+        for(int i=0;i<temp.size();i++)
+        {
+            if(temp.get(i)==0)
+                break;
+            else
+            {arr3[k]=temp.get(i);
+                k++;}
+        }
+        return arr3;
+    }
+}
