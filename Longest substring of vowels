@@ -1,0 +1,1 @@
+//The idea is to traverse the string and keep track of current number of vowels in the string. If we see a character that is not vowel, we reset count to 0. But before resetting we update max count value which is going to be our result.
