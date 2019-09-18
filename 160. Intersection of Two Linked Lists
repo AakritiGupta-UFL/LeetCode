@@ -25,3 +25,35 @@ public class Solution {
         return null;
     }
 }
+
+                                                    * APPROACH 2
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode A=headA;
+        ListNode B=headB;
+        Set<ListNode> map=new HashSet<>();
+        while(A!=null){
+            map.add(A);
+            A=A.next;
+        }
+        if(map.isEmpty()) 
+            return null;
+        while(B!=null){
+            if(map.contains(B))
+            { return B;}
+            B=B.next;
+        }
+        return null;
+    }
+}
