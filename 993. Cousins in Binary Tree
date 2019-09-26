@@ -1,0 +1,47 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+       Map<Integer,Integer>parent=new HashMap<>(); 
+       Map<Integer,Integer>level=new HashMap<>();
+        int height=height(root);
+        for(int i=1;i<=height;i++){
+            printGivenLevel(root,i,parent,level);
+        }
+        if(parent.get(x)==parent.get(y)) return false;
+        if(level.get(x)!=level.get(y)) return false;
+     return true;
+    }
+    
+    int height(TreeNode root) 
+    { 
+        if (root == null) 
+           return 0; 
+        else
+        { 
+           
+            int lheight = height(root.left); 
+            int rheight = height(root.right); 
+            if (lheight > rheight) 
+                return(lheight+1); 
+            else return(rheight+1);  
+        } 
+    } 
+     void printGivenLevel(TreeNode root,int i,Map<Integer,Integer>parent,Map<Integer,Integer>level){
+        if(root==null)
+            return;
+        level.put(root.val,i);
+        if(root.left!=null) {parent.put(root.left.val,root.val);
+                            printGivenLevel(root.left,i-1,parent,level);}
+        if(root.right!=null) {parent.put(root.right.val,root.val);
+                              printGivenLevel(root.right,i-1,parent,level);}
+    }
+    
+}
