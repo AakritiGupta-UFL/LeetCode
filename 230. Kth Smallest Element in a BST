@@ -1,0 +1,22 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+   List<Integer> arr=new ArrayList<>();
+    public int kthSmallest(TreeNode root, int k) {
+        printInOrder(root);
+        return arr.get(k-1);
+    }
+    void printInOrder(TreeNode node){
+        if(node ==null) return;
+        printInOrder(node.left);
+        arr.add(node.val);
+        printInOrder(node.right);  
+    }
+}
