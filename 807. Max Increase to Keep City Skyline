@@ -1,0 +1,32 @@
+class Solution {
+    public int maxIncreaseKeepingSkyline(int[][] grid) {
+        List<Integer> left=new ArrayList<>();
+        List<Integer> top=new ArrayList<>();
+        int sum=0;
+        for(int i=0;i<grid.length;i++){
+            int max=0;
+            for(int j=0;j<grid[0].length;j++){
+                 max=Math.max(max,grid[i][j]);
+            } 
+            left.add(max);
+        }
+        
+        for (int i = 0; i < grid[0].length; i++) {
+            int max = 0;
+            for (int j = 0; j < grid.length; j++) {
+                max = Math.max(max, grid[j][i]);
+            }
+            top.add(max);
+        }
+        for(int i=0;i<grid[0].length;i++){
+            int min=Integer.MAX_VALUE;
+            for(int j=0;j<grid.length;j++){
+                min=Math.min(top.get(j),left.get(i));
+                sum+=(-grid[i][j]+min);
+                grid[i][j]=min;
+    
+            }
+        }
+       return sum; 
+    }
+}
