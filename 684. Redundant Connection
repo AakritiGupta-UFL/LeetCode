@@ -1,0 +1,49 @@
+class Solution {
+    public int find(int[] parent, int i)
+    {
+        if(parent[i]==-1) return i;
+        int k=find(parent,parent[i]);
+        return k;
+    }
+
+    public void union(int[] parent, int source, int des)
+    {
+        Solution s=new Solution();
+        int x=s.find(parent,source);
+        int y=s.find(parent, des);
+        parent[x]=y;
+    }
+
+
+    public int[] findRedundantConnection(int[][] edges) {
+        Solution s=new Solution();
+        int max_vertex=1000;
+        int[] result=new int[2];
+        int[] parent= new int[max_vertex+1];
+        for(int i=1;i<=1000;i++)
+        {
+            parent[i]=-1;
+        }
+
+        for(int[] e:edges)
+        {
+            int firstVertex=e[0];
+            int secondVertex=e[1];
+
+            int parentOne=s.find(parent,firstVertex);
+            int parentTwo=s.find(parent,secondVertex);
+
+            if(parentOne==parentTwo && parentOne!=-1)
+            {
+                result[0]=firstVertex;
+                result[1]=secondVertex;
+            }
+            else
+            {
+                s.union(parent,firstVertex,secondVertex);
+            }
+        }
+
+        return result;
+    }
+}
