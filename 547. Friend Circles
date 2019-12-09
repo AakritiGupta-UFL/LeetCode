@@ -1,0 +1,70 @@
+class Solution {
+    public int findCircleNum(int[][] M) {
+        int row = M.length;
+        unionFind uf=new unionFind(row);
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<row;j++)
+            {
+                if(M[i][j]==1) 
+                    uf.union(i,j);
+            }
+        }
+        return uf.getComponents();
+    }
+
+
+
+private static class unionFind
+    {
+     int components;
+     int[] parents;
+     int[] size;
+    
+    //n is no of nodes
+    unionFind(int n){
+        components=n;
+        parents=new int[n+1];
+        size=new int[n+1];
+        for(int i=1;i<=n;i++)
+        {
+            parents[i]=i;
+            size[i]=1;
+        }}
+    
+    public void union(int a,int b)
+    {
+       int parentA=find(a);
+       int parentB=find(b);
+        
+        if (parentA == parentB) {
+                return;
+            }
+        if(size[parentA]>size[parentB])
+        {
+            parents[parentB]=parentA;
+            size[parentA]+=size[parentB];
+        }
+        else
+        {
+            parents[parentA]=parentB;
+            size[parentB]+=size[parentA];
+        }
+        components--;
+    }
+    
+    public int find(int a)
+    {
+        if(parents[a]==a) return a;
+        int p=find(parents[a]);
+        return p;
+    }
+        
+        
+    public int getComponents()
+    {
+      return components;
+    }
+    
+    }
+}    
