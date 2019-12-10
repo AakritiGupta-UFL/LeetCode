@@ -1,0 +1,40 @@
+class Solution {
+    public int removeStones(int[][] stones){
+        int N = stones.length;
+        UnionFind uf=new UnionFind(20000);
+        
+        for (int[] stone: stones)
+            uf.union(stone[0], stone[1] + 10000);
+
+        Set<Integer> seen = new HashSet();
+        
+        for (int[] stone: stones)
+            seen.add(uf.find(stone[0]));
+
+        return N - seen.size();
+    }
+    
+    private static class UnionFind{
+        int[] parents;
+        
+        UnionFind(int n){
+            parents=new int[n+1];
+            for(int i=1;i<=n;i++)
+            {
+                parents[i]=i;
+            }
+        }
+        
+        public int find(int a)
+        {
+            if(parents[a]==a) return a;
+            int p=find(parents[a]);
+            return p;
+        }
+        
+        public void union(int a,int b)
+        {
+            parents[find(a)]=find(b);
+        }
+    }
+}
