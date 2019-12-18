@@ -1,0 +1,24 @@
+class Solution {
+    public int numTrees(int n) {
+        int[] solutions=new int[n+1];
+        for(int i=0;i<n;i++)
+        {
+          solutions[i]=-1;  
+        }
+       return numPossibilities(n,solutions);
+    }
+    
+    public int numPossibilities(int n,int[]solutions)
+    {
+        int num=0;
+        if((n==1)||(n==0)) return 1; 
+        for (int i = 1; i <= n; i++){
+        if(solutions[i-1]==-1)
+           solutions[i-1] =numPossibilities(i-1,solutions);
+        if(solutions[n-i]==-1)
+            solutions[n-i] =numPossibilities(n-i,solutions); 
+        num+= solutions[i-1]* solutions[n-i]; 
+        }
+        return num;
+    }
+}
