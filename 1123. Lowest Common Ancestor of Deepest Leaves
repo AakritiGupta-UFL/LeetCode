@@ -1,0 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode lcaDeepestLeaves(TreeNode root) {
+		return root == null ? null : lca(root, 0, maxDepth(root) - 1);
+	}
+	
+	private int maxDepth(TreeNode node) {
+		if (node == null) return 0;
+		return 1 + Math.max(maxDepth(node.left), maxDepth(node.right));
+	}
+	
+	private TreeNode lca(TreeNode node, int depth, int maxDepth) {
+        if (node == null) return null;
+		if (depth == maxDepth) return node;
+		final TreeNode lhs = lca(node.left, depth + 1, maxDepth);
+		final TreeNode rhs = lca(node.right, depth + 1, maxDepth);
+		if (lhs != null && rhs != null) return node;
+		if (lhs != null) return lhs;
+		return rhs;
+	}
+}
