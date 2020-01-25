@@ -1,0 +1,37 @@
+class Solution {
+        int[] answer;
+    public int[] loudAndRich(int[][] richer, int[] quiet) {
+        answer=new int[quiet.length];
+        Arrays.fill(answer,-1);
+        ArrayList<Integer>[] graph=new ArrayList[quiet.length];
+        
+        for(int i=0;i<quiet.length;++i)
+        {
+            graph[i]=new ArrayList<Integer>();
+        }
+        for(int [] edge:richer)
+        {
+            graph[edge[1]].add(edge[0]);
+        }
+        
+        for(int i=0;i<quiet.length;++i)
+        {
+            dfs(i,graph,quiet);
+        }
+        return answer;
+    }
+    
+    public int dfs(int i, ArrayList<Integer>[]graph,int[]quiet)
+    {
+        if(answer[i]==-1){
+            answer[i]=i;
+        for(int child: graph[i])
+        {
+           int cand= dfs(child,graph,quiet);
+           if(quiet[cand]<quiet[answer[i]]) 
+               answer[i]=cand; 
+        }
+        }
+        return answer[i];
+    }
+}
