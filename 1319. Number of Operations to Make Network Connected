@@ -1,0 +1,37 @@
+class Solution {
+    public int makeConnected(int n, int[][] connections) {
+        int NoOfEdges=connections.length;
+        if(NoOfEdges<n-1) return -1;
+        //find no of unconnected components
+        int count=n;
+        int[] root=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            root[i]=i;
+        }
+        
+        for(int i=0; i<connections.length; i++){
+        int x = connections[i][0];
+        int y = connections[i][1];
+ 
+        int xRoot = getRoot(root, x);
+        int yRoot = getRoot(root, y);
+ 
+        if(xRoot!=yRoot){
+            count--;
+            root[xRoot]=yRoot;
+        }}
+        
+        
+        
+        return count-1;
+    }
+    
+    public int getRoot(int[] arr, int i){
+    while(arr[i]!=i){
+        arr[i]= arr[arr[i]];
+        i=arr[i];
+    }
+    return i;
+}
+}
