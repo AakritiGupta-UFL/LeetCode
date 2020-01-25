@@ -1,0 +1,48 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int leftCount=0;
+    int rightCount=0;
+    int value=1;
+    public boolean btreeGameWinningMove(TreeNode root, int n, int x) {
+       TreeNode play1=findNode(root,x);
+       if(play1.left!=null) leftCount=countNodes(play1.left);
+        value=1;
+       if(play1.right!=null) rightCount=countNodes(play1.right);
+        if(leftCount+rightCount+1<(n+1)/2) return true;
+        if(leftCount>n/2 || rightCount>n/2) return true;
+    
+    return false;
+    }
+   
+    public TreeNode findNode(TreeNode root,int x){
+        if(root==null) return null;
+        if(root.val==x) return root;
+        TreeNode l=findNode(root.left,x);
+        if(l!=null) return l;
+        return findNode(root.right,x);
+    }
+    
+    public int countNodes(TreeNode play1){
+        if(play1==null) return 0;
+        //int value=0;
+        if(play1.left!=null)
+        {
+            value++;
+            countNodes(play1.left);
+        }
+       if(play1.right!=null)
+        {
+            value++;
+            countNodes(play1.right);
+        } 
+        return value;
+    }
+}
