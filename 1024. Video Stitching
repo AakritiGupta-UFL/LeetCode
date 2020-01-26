@@ -1,0 +1,24 @@
+class Solution {
+    public int videoStitching(int[][] clips, int T) {
+        int start=0;
+        int end=T;
+        int temp=0;
+        int result=0;
+       
+        while(start<end){
+         boolean exist=false;    
+        for(int[]clip:clips)
+        {
+          if(clip[0]<=start && temp<clip[1])
+              {
+                exist=true;
+                if(clip[1]>temp) {temp=clip[1];} 
+              } 
+        }
+            if(!exist) return -1;
+            start=temp;
+            result++;
+        }
+        return result;
+    }
+}
