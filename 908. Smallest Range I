@@ -1,0 +1,15 @@
+class Solution {
+    public int smallestRangeI(int[] nums, int K) {
+        Arrays.sort(nums);
+        int result=0;
+        if(nums[nums.length-1]-nums[0]<2*K) return 0;
+        else
+        {
+            int max=nums[nums.length-1]-K;
+            int min=nums[0]+K;
+            result=max-min;
+        }
+        return result;
+    }
+}
+
