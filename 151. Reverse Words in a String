@@ -1,0 +1,26 @@
+class Solution {
+    public String reverseWords(String s) {
+        if(s.length()==0) return "";
+        String[] arr=s.split(" ");
+        StringBuilder result=new StringBuilder();
+        for(int i=arr.length-1;i>=0;i--)
+        {
+            if(arr[i].equals("")) continue;
+            result.append(arr[i]);
+            result.append(" ");
+        }
+        String ans="";
+        //if(result.length()==0) return result.toString();
+        ans=removeTrailingSpaces(result);
+        return ans;
+    }
+    private String removeTrailingSpaces(StringBuilder sb)
+    {
+    int i = sb.length()-1;
+    while(i>=0 && sb.charAt(i) == ' '){
+        i--;
+    }
+    String s = sb.substring(0, i+1);
+    return s;
+    }
+}
