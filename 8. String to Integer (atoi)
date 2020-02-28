@@ -1,0 +1,33 @@
+class Solution {
+    public int myAtoi(String str) {
+        if(str.length()==0) return 0;
+        str=str.strip();
+        boolean negative=false;
+        double result=0;
+        char[] arr=str.toCharArray();
+        if(arr.length==0) return 0;
+        int index=0;
+        if((arr[0]>'9' || arr[0]<'0') && arr[0]!='+' && arr[0]!='-')
+        {
+            return 0;
+        }
+        if(arr[0]=='-') {negative=true;
+                         index++;
+                        }
+        if(arr[0]=='+') index++;
+        //if(Character.isDigit(arr[0])) result=(int)arr[0]-(int)'0';
+        for(int i=index;i<arr.length;i++)
+        {
+            if(!Character.isDigit(arr[i])) break;
+            result*=10;
+            result+=((int)arr[i]-(int)'0');
+            
+            if(result> Integer.MAX_VALUE || result<Integer.MIN_VALUE){
+                if(negative== true) return Integer.MIN_VALUE;
+                else return Integer.MAX_VALUE;
+            }
+        }
+        if(negative== true) return -(int)result;
+        return (int)result;
+    }
+}
